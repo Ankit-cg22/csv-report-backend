@@ -4,12 +4,14 @@ const generateData = require("./utils/parseData")
 const cors = require('cors')
 const multer = require("multer")
 
-app.use(cors())
+app.use(cors({origin:'*'}))
 app.use(express.urlencoded({
     extended: true
 }));
 const upload = multer({dest : "uploads"})
-
+app.get("/",(req,res)=>{
+    console.log("server is up")
+})
 app.post("/parseFile" , upload.single("excelfile") , (req, res)=>{
     const metadata = generateData(req.file.path);
     res.status(200).json({metadata})
