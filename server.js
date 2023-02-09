@@ -10,7 +10,7 @@ app.use(express.urlencoded({
 }));
 const upload = multer({dest : "uploads"})
 app.get("/",(req,res)=>{
-    console.log("server is up")
+    res.status(200).send("Welcom to report generation server")
 })
 app.post("/parseFile" , upload.single("excelfile") , (req, res)=>{
     const metadata = generateData(req.file.path);
